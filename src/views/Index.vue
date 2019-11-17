@@ -1,8 +1,5 @@
 <template>
   <div>
-    <!-- 头部区域 -->
-    <van-nav-bar title="黑马程序员.vant" left-arrow />
-
     <!-- 主体区域 -->
     <router-view></router-view>
 
@@ -24,19 +21,12 @@ export default {
     }
   },
   created() {},
-  methods: {}
+  methods: {
+    onClickLeft() {
+      this.$router.go(-1)
+    }
+  }
 }
 </script>
 
-<style lang="less" scoped>
-.van-nav-bar {
-  height: 40px;
-}
-.van-nav-bar {
-  background-color: #1989fa;
-}
-.van-nav-bar__title {
-  color: #fff !important;
-  font-size: 14px;
-}
-</style>
+<style lang="less" scoped></style>
