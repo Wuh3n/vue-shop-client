@@ -15,10 +15,10 @@ const router = new VueRouter({
       path: '/index',
       component: Index,
       children: [
-        { path: '/index/home', component: Home },
-        { path: '/index/cart', component: Cart },
-        { path: '/index/member', component: Member },
-        { path: '/index/search', component: Search }
+        { path: '/home', component: Home },
+        { path: '/cart', component: Cart },
+        { path: '/member', component: Member },
+        { path: '/search', component: Search }
       ]
     }
   ],
