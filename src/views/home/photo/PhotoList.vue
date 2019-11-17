@@ -2,7 +2,7 @@
   <div>
     <!-- 头部区域-->
     <van-nav-bar title="黑马程序员.vant" @click-left="onClickLeft" left-arrow left-text="返回" />
-    搜索
+    图片列表页
   </div>
 </template>
 

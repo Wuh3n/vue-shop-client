@@ -1,14 +1,16 @@
 <template>
   <div>
+    <!-- 头部区域-->
+    <van-nav-bar title="黑马程序员.vant" />
     <van-swipe :autoplay="3000">
       <van-swipe-item v-for="item in imgList" :key="item.id">
         <img v-lazy="item.img" />
       </van-swipe-item>
     </van-swipe>
     <van-row>
-      <van-col span="8"><img src="../../assets/images/menu1.png" alt="" /><span>新闻资讯</span></van-col>
-      <van-col span="8"><img src="../../assets/images/menu2.png" alt="" /><span>图片分享</span></van-col>
-      <van-col span="8"><img src="../../assets/images/menu3.png" alt="" /><span>商品购买</span></van-col>
+      <van-col @click="newslist" span="8"><img src="../../assets/images/menu1.png" alt="" /><span>新闻资讯</span></van-col>
+      <van-col @click="photo" span="8"><img src="../../assets/images/menu2.png" alt="" /><span>图片分享</span></van-col>
+      <van-col @click="goods" span="8"><img src="../../assets/images/menu3.png" alt="" /><span>商品购买</span></van-col>
     </van-row>
     <van-row>
       <van-col span="8"><img src="../../assets/images/menu4.png" alt="" /><span>留言反馈</span></van-col>
@@ -34,6 +36,15 @@ export default {
         params: {}
       })
       this.imgList = res.message
+    },
+    newslist() {
+      this.$router.push('/newslist')
+    },
+    photo() {
+      this.$router.push('/photo')
+    },
+    goods() {
+      this.$router.push('/goods')
     }
   }
 }

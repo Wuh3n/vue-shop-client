@@ -5,6 +5,9 @@ import Home from '../views/home/Home.vue'
 import Cart from '../views/cart/Cart.vue'
 import Member from '../views/member/Member.vue'
 import Search from '../views/search/Search.vue'
+import NewsList from '../views/home/news/NewsList.vue'
+import PhotoList from '../views/home/photo/PhotoList.vue'
+import GoodsList from '../views/home/goods/GoodsList.vue'
 Vue.use(VueRouter)
 
 const router = new VueRouter({
@@ -18,7 +21,10 @@ const router = new VueRouter({
         { path: '/home', component: Home },
         { path: '/cart', component: Cart },
         { path: '/member', component: Member },
-        { path: '/search', component: Search }
+        { path: '/search', component: Search },
+        { path: '/newslist', component: NewsList },
+        { path: '/photo', component: PhotoList },
+        { path: '/goods', component: GoodsList }
       ]
     }
   ],

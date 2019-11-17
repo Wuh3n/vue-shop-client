@@ -2,7 +2,7 @@
   <div>
     <!-- 头部区域-->
     <van-nav-bar title="黑马程序员.vant" @click-left="onClickLeft" left-arrow left-text="返回" />
-    搜索
+    商品列表页
   </div>
 </template>
 
@@ -14,7 +14,7 @@ export default {
   created() {},
   methods: {
     onClickLeft() {
-      this.$router.go(-1)
+      this.$router.push('/home')
     }
   }
 }
