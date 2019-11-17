@@ -8,10 +8,10 @@
 
     <!-- 底部导航 -->
     <van-tabbar v-model="active">
-      <van-tabbar-item to="/index/home" icon="home-o">首页</van-tabbar-item>
-      <van-tabbar-item to="/index/member" icon="manager-o">会员</van-tabbar-item>
-      <van-tabbar-item to="/index/cart" icon="shopping-cart-o">购物车</van-tabbar-item>
-      <van-tabbar-item to="/index/search" icon="search">搜索</van-tabbar-item>
+      <van-tabbar-item to="/home" icon="home-o">首页</van-tabbar-item>
+      <van-tabbar-item to="/member" icon="manager-o">会员</van-tabbar-item>
+      <van-tabbar-item to="/cart" icon="shopping-cart-o">购物车</van-tabbar-item>
+      <van-tabbar-item to="/search" icon="search">搜索</van-tabbar-item>
     </van-tabbar>
   </div>
 </template>
