@@ -8,6 +8,7 @@ import axios from 'axios'
 import './assets/font/iconfont.css'
 import { Lazyload } from 'vant'
 import './assets/css/global.css'
+
 // options 为可选参数，无则不传
 Vue.use(Lazyload)
 // 配置请求的基准URL地址

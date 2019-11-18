@@ -8,6 +8,8 @@ import Search from '../views/search/Search.vue'
 import NewsList from '../views/home/news/NewsList.vue'
 import PhotoList from '../views/home/photo/PhotoList.vue'
 import GoodsList from '../views/home/goods/GoodsList.vue'
+import NewsDetail from '../views/home/news/NewsDetail.vue'
+import PhotoInfo from '../views/home/photo/PhotoInfo.vue'
 Vue.use(VueRouter)
 
 const router = new VueRouter({
@@ -24,7 +26,9 @@ const router = new VueRouter({
         { path: '/search', component: Search },
         { path: '/newslist', component: NewsList },
         { path: '/photo', component: PhotoList },
-        { path: '/goods', component: GoodsList }
+        { path: '/goods', component: GoodsList },
+        { path: '/news/detail/:id', component: NewsDetail },
+        { path: '/photo/Info/:id', component: PhotoInfo }
       ]
     }
   ],
