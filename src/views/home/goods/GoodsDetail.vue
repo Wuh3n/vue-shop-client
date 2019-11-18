@@ -65,6 +65,7 @@ export default {
     },
     getGoodsId() {
       this.goodsId = location.hash.split('/')[location.hash.split('/').length - 1]
+      console.log(this.value)
     },
     async getImgList() {
       const { data: res } = await this.$http.get(`/api/getthumimages/${this.goodsId}`, {
@@ -86,13 +87,27 @@ export default {
       addCartList.title = this.info[0].title
       addCartList.img = this.imgList[0].src
 
-      if (window.localStorage.setItem('cart')) {
-        window.localStorage.setItem('cart', JSON.stringify(this.purchaseList))
-      }
       this.purchaseList.push(addCartList)
-      window.localStorage.setItem('cart', JSON.stringify(this.purchaseList))
-      console.log(this.purchaseList)
+      if (window.localStorage.getItem('cart') === null) {
+        window.localStorage.setItem('cart', JSON.stringify(this.purchaseList))
+      } else {
+        let data = JSON.parse(window.localStorage.getItem('cart'))
+        window.localStorage.removeItem('cart')
+        console.log(data)
+        data.forEach(item => {
+          if (item.id === addCartList.id) {
+            item.value++
+            window.localStorage.setItem('cart', JSON.stringify(data))
+          } else {
+            data.push(addCartList)
+            window.localStorage.setItem('cart', JSON.stringify(data.push(addCartList)))
+          }
+        })
+      }
       console.log(window.localStorage.getItem('cart'))
+
+      // console.log(this.purchaseList)
+      // console.log(window.localStorage.getItem('cart'))
     }
   }
 }
