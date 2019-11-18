@@ -96,7 +96,7 @@ export default {
         // console.log(data)
         data.forEach(item => {
           if (item.id === this.addCartList.id) {
-            item.value++
+            item.value += this.addCartList.value
             window.localStorage.setItem('cart', JSON.stringify(data))
           } else {
             console.log(...this.purchaseList)
