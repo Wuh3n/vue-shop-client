@@ -15,7 +15,7 @@ module.exports = {
     'key-spacing': [0, { beforeColon: false, afterColon: true }], //对象字面量中冒号的前后空
     'vue/no-unused-vars': 0,
     'standard/computed-property-even-spacing': 0,
-    'camelcase': 0,
+    camelcase: 0,
     'no-irregular-whitespace': 0
   },
   parserOptions: {
