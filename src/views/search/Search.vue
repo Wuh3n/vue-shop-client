@@ -28,8 +28,9 @@ export default {
   data() {
     return {
       value: '',
-      arr: ['123', '234', '12333333', '11233333', '1233333', '1233333333', '123333'],
-      historyList: []
+      arr: [],
+      historyList: [],
+      localArr: []
     }
   },
   created() {},
