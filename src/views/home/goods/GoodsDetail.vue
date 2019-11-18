@@ -51,7 +51,8 @@ export default {
       imgList: [],
       info: [],
       value: 1,
-      purchaseList: []
+      purchaseList: [],
+      addCartList: {}
     }
   },
   created() {
@@ -65,7 +66,6 @@ export default {
     },
     getGoodsId() {
       this.goodsId = location.hash.split('/')[location.hash.split('/').length - 1]
-      console.log(this.value)
     },
     async getImgList() {
       const { data: res } = await this.$http.get(`/api/getthumimages/${this.goodsId}`, {
@@ -80,31 +80,32 @@ export default {
       this.info = res.message
     },
     addCart() {
-      const addCartList = {}
-      addCartList.id = this.info[0].id
-      addCartList.sell_price = this.info[0].sell_price
-      addCartList.value = this.value
-      addCartList.title = this.info[0].title
-      addCartList.img = this.imgList[0].src
+      // const addCartList = {}
+      this.addCartList.id = this.info[0].id
+      this.addCartList.sell_price = this.info[0].sell_price
+      this.addCartList.value = this.value
+      this.addCartList.title = this.info[0].title
+      this.addCartList.img = this.imgList[0].src
 
-      this.purchaseList.push(addCartList)
+      this.purchaseList.push(this.addCartList)
       if (window.localStorage.getItem('cart') === null) {
         window.localStorage.setItem('cart', JSON.stringify(this.purchaseList))
       } else {
         let data = JSON.parse(window.localStorage.getItem('cart'))
         window.localStorage.removeItem('cart')
-        console.log(data)
+        // console.log(data)
         data.forEach(item => {
-          if (item.id === addCartList.id) {
+          if (item.id === this.addCartList.id) {
             item.value++
             window.localStorage.setItem('cart', JSON.stringify(data))
           } else {
-            data.push(addCartList)
-            window.localStorage.setItem('cart', JSON.stringify(data.push(addCartList)))
+            console.log(...this.purchaseList)
+            data.push(...this.purchaseList)
+            window.localStorage.setItem('cart', JSON.stringify(data))
           }
         })
       }
-      console.log(window.localStorage.getItem('cart'))
+      // console.log(window.localStorage.getItem('cart'))
 
       // console.log(this.purchaseList)
       // console.log(window.localStorage.getItem('cart'))
