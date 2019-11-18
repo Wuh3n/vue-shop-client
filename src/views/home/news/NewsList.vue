@@ -103,4 +103,11 @@ export default {
   width: 42px;
   height: 42px;
 }
+.van-pull-refresh {
+  &::after {
+    content: '';
+    height: 50px;
+    display: block;
+  }
+}
 </style>
