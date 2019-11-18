@@ -13,6 +13,7 @@ import PhotoInfo from '../views/home/photo/PhotoInfo.vue'
 import GoodsDetail from '../views/home/goods/GoodsDetail.vue'
 import Goodsdesc from '../views/home/goods/Goodsdesc.vue'
 import Goodscomments from '../views/home/goods/Goodscomments.vue'
+import Addgoods from '../views/search/Addgoods.vue'
 Vue.use(VueRouter)
 
 const router = new VueRouter({
@@ -33,7 +34,8 @@ const router = new VueRouter({
         { path: '/photo/Info/:id', component: PhotoInfo },
         { path: '/goods/detail/:id', component: GoodsDetail },
         { path: '/goodsdesc/:id', component: Goodsdesc },
-        { path: '/goodscomments/:id', component: Goodscomments }
+        { path: '/goodscomments/:id', component: Goodscomments },
+        { path: '/addgoods', component: Addgoods }
       ]
     },
     { path: '/cart', component: Cart }
