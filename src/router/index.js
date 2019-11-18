@@ -11,6 +11,8 @@ import GoodsList from '../views/home/goods/GoodsList.vue'
 import NewsDetail from '../views/home/news/NewsDetail.vue'
 import PhotoInfo from '../views/home/photo/PhotoInfo.vue'
 import GoodsDetail from '../views/home/goods/GoodsDetail.vue'
+import Goodsdesc from '../views/home/goods/Goodsdesc.vue'
+import Goodscomments from '../views/home/goods/Goodscomments.vue'
 Vue.use(VueRouter)
 
 const router = new VueRouter({
@@ -22,7 +24,6 @@ const router = new VueRouter({
       component: Index,
       children: [
         { path: '/home', component: Home },
-        { path: '/cart', component: Cart },
         { path: '/member', component: Member },
         { path: '/search', component: Search },
         { path: '/newslist', component: NewsList },
@@ -30,9 +31,12 @@ const router = new VueRouter({
         { path: '/goods', component: GoodsList },
         { path: '/news/detail/:id', component: NewsDetail },
         { path: '/photo/Info/:id', component: PhotoInfo },
-        { path: '/goods/detail/:id', component: GoodsDetail }
+        { path: '/goods/detail/:id', component: GoodsDetail },
+        { path: '/goodsdesc/:id', component: Goodsdesc },
+        { path: '/goodscomments/:id', component: Goodscomments }
       ]
-    }
+    },
+    { path: '/cart', component: Cart }
   ],
   linkActiveClass: '自定义选中router-link时高亮类名'
 })
