@@ -2,25 +2,27 @@
   <div>
     <!-- 头部区域-->
     <van-nav-bar title="黑马程序员.vant" @click-left="onClickLeft" left-arrow left-text="返回" />
-    <van-tabs swipeable @change="changeTabs">
-      <van-tab v-for="item in photoSort" :key="item.id" :title="item.title" :name="item.id">
-        <!-- <van-grid :border="false" :column-num="1">
+    <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
+      <van-tabs swipeable @change="changeTabs">
+        <van-tab v-for="item in photoSort" :key="item.id" :title="item.title" :name="item.id">
+          <!-- <van-grid :border="false" :column-num="1">
           <van-grid-item v-for="item in getPhoto" :key="item.id">
             <van-image lazy-load :src="item.img_url" />
             <div class="info">123</div>
           </van-grid-item>
         </van-grid> -->
-        <ul>
-          <li v-for="item in getPhoto" :key="item.id" @click="goPhotoDetails(item.id)">
-            <van-image lazy-load :src="item.img_url" />
-            <div class="info">
-              <p>{{ item.title }}</p>
-              <p>{{ item.zhaiyao }}</p>
-            </div>
-          </li>
-        </ul>
-      </van-tab>
-    </van-tabs>
+          <ul>
+            <li v-for="item in getPhoto" :key="item.id" @click="goPhotoDetails(item.id)">
+              <van-image lazy-load :src="item.img_url" />
+              <div class="info">
+                <p>{{ item.title }}</p>
+                <p>{{ item.zhaiyao }}</p>
+              </div>
+            </li>
+          </ul>
+        </van-tab>
+      </van-tabs>
+    </van-pull-refresh>
   </div>
 </template>
 
@@ -30,7 +32,8 @@ export default {
     return {
       photoSort: [],
       photoId: 0,
-      getPhoto: []
+      getPhoto: [],
+      isLoading: false
     }
   },
   created() {
@@ -61,6 +64,13 @@ export default {
     },
     goPhotoDetails(id) {
       this.$router.push('./photo/Info/' + id)
+    },
+    onRefresh() {
+      setTimeout(() => {
+        this.getPhotoList()
+        this.$toast('刷新成功')
+        this.isLoading = false
+      }, 500)
     }
   }
 }
