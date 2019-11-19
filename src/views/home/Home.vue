@@ -1,6 +1,6 @@
 <template>
   <div>
-    主页
+    <van-button type="primary" to="/index/home/goods">商品购买</van-button>
   </div>
 </template>
 

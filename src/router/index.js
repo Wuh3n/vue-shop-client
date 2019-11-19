@@ -5,8 +5,13 @@ import Home from '../views/home/Home.vue'
 import Cart from '../views/cart/Cart.vue'
 import Member from '../views/member/Member.vue'
 import Search from '../views/search/Search.vue'
+import ProductList from '../views/home/productList.vue'
 Vue.use(VueRouter)
 
+const originalPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+}
 const router = new VueRouter({
   routes: [
     // 路由匹配规则
@@ -18,7 +23,8 @@ const router = new VueRouter({
         { path: '/index/home', component: Home },
         { path: '/index/cart', component: Cart },
         { path: '/index/member', component: Member },
-        { path: '/index/search', component: Search }
+        { path: '/index/search', component: Search },
+        { path: '/index/home/goods', component: ProductList }
       ]
     }
   ],
