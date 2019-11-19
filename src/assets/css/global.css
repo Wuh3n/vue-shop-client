@@ -6,3 +6,9 @@
 .van-nav-bar {
   background-color: #1989fa;
 }
+.van-nav-bar__title,
+.van-nav-bar__arrow,
+.van-nav-bar__text {
+  color: #fff !important;
+  font-size: 14px;
+}
