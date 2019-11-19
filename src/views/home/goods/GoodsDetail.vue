@@ -24,7 +24,7 @@
         <div class="num">购买数量：<van-stepper v-model="value" /></div>
         <div class="btn">
           <van-button color="#1989fa">立即购买</van-button>
-          <van-button color="#ff4444">加入购物车</van-button>
+          <van-button color="#ff4444" @click="addCart">加入购物车</van-button>
         </div>
       </div>
       <div class="botton">
@@ -35,8 +35,8 @@
           <p>上架时间：{{ item.add_time.split('T')[0] }}</p>
         </div>
         <div class="btn">
-          <van-button plain hairline type="info" size="large">图文介绍</van-button>
-          <van-button plain hairline type="warning" size="large">商品评论</van-button>
+          <van-button plain hairline type="info" size="large" :to="'/goodsdesc/' + goodsId">图文介绍</van-button>
+          <van-button plain hairline type="warning" size="large" :to="'/goodscomments/' + goodsId">商品评论</van-button>
         </div>
       </div>
     </div>
@@ -50,7 +50,9 @@ export default {
       goodsId: 0,
       imgList: [],
       info: [],
-      value: 1
+      value: 1,
+      purchaseList: [],
+      addCartList: {}
     }
   },
   created() {
@@ -69,15 +71,44 @@ export default {
       const { data: res } = await this.$http.get(`/api/getthumimages/${this.goodsId}`, {
         params: {}
       })
-      console.log(res.message)
       this.imgList = res.message
     },
     async getInfo() {
       const { data: res } = await this.$http.get(`/api/goods/getinfo/${this.goodsId}`, {
         params: {}
       })
-      console.log(res)
       this.info = res.message
+    },
+    addCart() {
+      // const addCartList = {}
+      this.addCartList.id = this.info[0].id
+      this.addCartList.sell_price = this.info[0].sell_price
+      this.addCartList.value = this.value
+      this.addCartList.title = this.info[0].title
+      this.addCartList.img = this.imgList[0].src
+
+      this.purchaseList.push(this.addCartList)
+      if (window.localStorage.getItem('cart') === null) {
+        window.localStorage.setItem('cart', JSON.stringify(this.purchaseList))
+      } else {
+        let data = JSON.parse(window.localStorage.getItem('cart'))
+        window.localStorage.removeItem('cart')
+        // console.log(data)
+        data.forEach(item => {
+          if (item.id === this.addCartList.id) {
+            item.value += this.addCartList.value
+            window.localStorage.setItem('cart', JSON.stringify(data))
+          } else {
+            console.log(...this.purchaseList)
+            data.push(...this.purchaseList)
+            window.localStorage.setItem('cart', JSON.stringify(data))
+          }
+        })
+      }
+      // console.log(window.localStorage.getItem('cart'))
+
+      // console.log(this.purchaseList)
+      // console.log(window.localStorage.getItem('cart'))
     }
   }
 }
