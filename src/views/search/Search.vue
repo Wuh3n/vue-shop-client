@@ -29,17 +29,26 @@ export default {
     return {
       value: '',
       arr: [],
-      historyList: [],
-      localArr: []
+      historyList: []
     }
   },
-  created() {},
+  created() {
+    this.getLocal()
+  },
   methods: {
     onClickLeft() {
       this.$router.go(-1)
     },
     async onClickRight() {
       this.$router.push('/addgoods')
+    },
+    getLocal() {
+      if (window.localStorage.getItem('gistory') === null) {
+        console.log(this.arr)
+        this.arr = []
+      } else {
+        this.arr = JSON.parse(window.localStorage.getItem('gistory'))
+      }
     },
     onSearch() {
       if (this.value.trim() === '') {
@@ -56,6 +65,12 @@ export default {
       if (!bool) {
         this.arr.unshift(this.value)
       }
+      if (window.localStorage.getItem('gistory') === null) {
+        window.localStorage.setItem('gistory', JSON.stringify(this.arr))
+      } else {
+        window.localStorage.removeItem('gistory')
+        window.localStorage.setItem('gistory', JSON.stringify(this.arr))
+      }
     },
     onCancel() {
       console.log('取消')
@@ -63,6 +78,9 @@ export default {
     },
     deleteHistory() {
       this.arr = []
+      if (window.localStorage.getItem('gistory') !== null) {
+        window.localStorage.removeItem('gistory')
+      }
     },
     async getHistoryList() {
       const { data: res } = await this.$http.get(`/api/getprodlist`, {

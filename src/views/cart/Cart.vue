@@ -7,7 +7,7 @@
       <p>购物车空空如也~</p>
       <van-button type="info" to="/goods">去逛逛</van-button>
     </div>
-    <van-submit-bar :price="total" button-text="提交订单" @submit="onSubmit" />
+    <van-submit-bar :price="total" button-text="提交订单" />
   </div>
 </template>
 
