@@ -40,6 +40,13 @@
         </div>
       </div>
     </div>
+    <!-- 底部导航 -->
+    <van-tabbar>
+      <van-tabbar-item to="/home" icon="home-o">首页</van-tabbar-item>
+      <van-tabbar-item to="/member" icon="manager-o">会员</van-tabbar-item>
+      <van-tabbar-item to="/cart" icon="shopping-cart-o" :info="num">购物车</van-tabbar-item>
+      <van-tabbar-item to="/search" icon="search">搜索</van-tabbar-item>
+    </van-tabbar>
   </div>
 </template>
 
@@ -52,13 +59,16 @@ export default {
       info: [],
       value: 1,
       purchaseList: [],
-      addCartList: {}
+      addCartList: {},
+      data: [],
+      num: 0
     }
   },
   created() {
     this.getGoodsId()
     this.getImgList()
     this.getInfo()
+    this.num = this.clickCart
   },
   methods: {
     onClickLeft() {
@@ -81,34 +91,52 @@ export default {
     },
     addCart() {
       // const addCartList = {}
+      this.addCartList = {}
       this.addCartList.id = this.info[0].id
       this.addCartList.sell_price = this.info[0].sell_price
       this.addCartList.value = this.value
       this.addCartList.title = this.info[0].title
       this.addCartList.img = this.imgList[0].src
-
+      this.num += this.value
       this.purchaseList.push(this.addCartList)
       if (window.localStorage.getItem('cart') === null) {
         window.localStorage.setItem('cart', JSON.stringify(this.purchaseList))
       } else {
-        let data = JSON.parse(window.localStorage.getItem('cart'))
+        this.data = JSON.parse(window.localStorage.getItem('cart'))
         window.localStorage.removeItem('cart')
         // console.log(data)
-        data.forEach(item => {
+        let curr_index = -1
+        this.data.forEach((item, index) => {
           if (item.id === this.addCartList.id) {
-            item.value += this.addCartList.value
-            window.localStorage.setItem('cart', JSON.stringify(data))
-          } else {
-            console.log(...this.purchaseList)
-            data.push(...this.purchaseList)
-            window.localStorage.setItem('cart', JSON.stringify(data))
+            curr_index = index
           }
         })
+
+        if (curr_index >= 0) {
+          this.data[curr_index].value += this.value
+        } else {
+          this.data.push(this.addCartList)
+        }
+        window.localStorage.setItem('cart', JSON.stringify(this.data))
       }
+
       // console.log(window.localStorage.getItem('cart'))
 
       // console.log(this.purchaseList)
       // console.log(window.localStorage.getItem('cart'))
+    }
+  },
+  computed: {
+    clickCart() {
+      let num = 0
+      if (window.localStorage.getItem('cart') !== null) {
+        let cartList = JSON.parse(window.localStorage.getItem('cart'))
+        cartList.forEach(item => {
+          num += item.value
+        })
+        return num
+      }
+      return 0
     }
   }
 }

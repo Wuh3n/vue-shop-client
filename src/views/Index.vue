@@ -7,7 +7,7 @@
     <van-tabbar v-model="active">
       <van-tabbar-item to="/home" icon="home-o">首页</van-tabbar-item>
       <van-tabbar-item to="/member" icon="manager-o">会员</van-tabbar-item>
-      <van-tabbar-item to="/cart" icon="shopping-cart-o" info="99+">购物车</van-tabbar-item>
+      <van-tabbar-item to="/cart" icon="shopping-cart-o" :info="clickCart">购物车</van-tabbar-item>
       <van-tabbar-item to="/search" icon="search">搜索</van-tabbar-item>
     </van-tabbar>
   </div>
@@ -24,6 +24,26 @@ export default {
   methods: {
     onClickLeft() {
       this.$router.go(-1)
+    }
+    // clickCart() {
+    //   let cartList = JSON.parse(window.localStorage.getItem('cart'))
+    //   cartList.forEach(item => {
+    //     this.infoNum += item.value
+    //   })
+    //   console.log(cartList, this.infoNum)
+    // }
+  },
+  computed: {
+    clickCart() {
+      let num = 0
+      if (window.localStorage.getItem('cart') !== null) {
+        let cartList = JSON.parse(window.localStorage.getItem('cart'))
+        cartList.forEach(item => {
+          num += item.value
+        })
+        return num
+      }
+      return 0
     }
   }
 }
