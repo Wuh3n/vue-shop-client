@@ -24,21 +24,87 @@ const router = new VueRouter({
       path: '/index',
       component: Index,
       children: [
-        { path: '/home', component: Home },
-        { path: '/member', component: Member },
-        { path: '/search', component: Search },
-        { path: '/newslist', component: NewsList },
-        { path: '/photo', component: PhotoList },
-        { path: '/goods', component: GoodsList },
-        { path: '/news/detail/:id', component: NewsDetail },
-        { path: '/photo/Info/:id', component: PhotoInfo },
-        { path: '/goods/detail/:id', component: GoodsDetail },
-        { path: '/goodsdesc/:id', component: Goodsdesc },
-        { path: '/goodscomments/:id', component: Goodscomments },
-        { path: '/addgoods', component: Addgoods }
+        {
+          path: '/home',
+          component: Home,
+          meta: {
+            index: 0
+          }
+        },
+        {
+          path: '/member',
+          component: Member,
+          meta: {
+            index: 2
+          }
+        },
+        {
+          path: '/search',
+          component: Search,
+          meta: {
+            index: 3
+          }
+        },
+        {
+          path: '/newslist',
+          component: NewsList,
+          meta: {
+            index: 4
+          }
+        },
+        {
+          path: '/photo',
+          component: PhotoList,
+          meta: {
+            index: 5
+          }
+        },
+        {
+          path: '/goods',
+          component: GoodsList,
+          meta: {
+            index: 6
+          }
+        },
+        {
+          path: '/news/detail/:id',
+          component: NewsDetail,
+          meta: {
+            index: 7
+          }
+        },
+        {
+          path: '/photo/Info/:id',
+          component: PhotoInfo,
+          meta: {
+            index: 8
+          }
+        },
+        {
+          path: '/goodsdesc/:id',
+          component: Goodsdesc,
+          meta: {
+            index: 9
+          }
+        },
+        {
+          path: '/goodscomments/:id',
+          component: Goodscomments,
+          meta: {
+            index: 10
+          }
+        },
+        {
+          path: '/addgoods',
+          component: Addgoods,
+          meta: {
+            index: 11
+          }
+        }
       ]
     },
-    { path: '/cart', component: Cart }
+    { path: '/cart', component: Cart },
+    { path: '/goods/detail/:id', component: GoodsDetail }
   ],
   linkActiveClass: '自定义选中router-link时高亮类名'
 })

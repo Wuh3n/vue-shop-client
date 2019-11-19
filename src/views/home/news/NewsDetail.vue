@@ -87,8 +87,17 @@ export default {
       }, 1000)
     },
     async submitComment() {
+      if (this.content.trim() === '') {
+        this.$toast('留言不能为空')
+        return
+      }
       const { data: res } = await this.$http.post(`/api/postcomment/${this.newsId}`, { content: this.content })
       console.log(res)
+      if (res.status === 0) {
+        this.content = ''
+        this.$toast('提交成功')
+        this.newCommentList()
+      }
     }
   }
 }
